@@ -23,7 +23,7 @@ app.post("/submit", (req, res) => {
   const { name, email, age, course } = req.body;
 
   // Server-side validation: Check that all required fields exist and are not empty
-  if (!name || !email || !age || !course || name.trim() === "" || email.trim() === "") {
+  if (!name || !email || !age || !course || String(name).trim() === "" || String(email).trim() === "") {
     return res.status(400).render("index", {
       error: "All fields are required. Please provide valid input for all fields.",
       formData: { name, email, age, course }
@@ -32,16 +32,16 @@ app.post("/submit", (req, res) => {
 
   // Render the result view with dynamically injected variables
   res.render("result", {
-    name: name.trim(),
-    email: email.trim(),
-    age: age.trim(),
-    course: course.trim()
+    name: String(name).trim(),
+    email: String(email).trim(),
+    age: String(age).trim(),
+    course: String(course).trim()
   });
 });
 
 // Port configuration for local development and Render deployment
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
