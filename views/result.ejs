@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Confirmation</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card result-card">
+      <div class="status-badge success-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 10 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      
+      <h2>Registration Successful!</h2>
+      <p class="subtitle">Welcome, <%= name %></p>
+
+      <div class="details-box">
+        <h3>Registration Details</h3>
+        <div class="detail-row">
+          <span class="detail-label">Name:</span>
+          <span class="detail-value"><%= name %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value"><%= email %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Age:</span>
+          <span class="detail-value"><%= age %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Course:</span>
+          <span class="detail-value"><%= course %></span>
+        </div>
+      </div>
+
+      <div class="action-box">
+        <a href="/" class="btn btn-secondary">Back to Registration</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
