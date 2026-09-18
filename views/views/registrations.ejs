@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Registrations</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h2>All Registrations (<%= registrations.length %>)</h2>
+
+    <% if (registrations.length === 0) { %>
+      <p>No registrations yet.</p>
+    <% } else { %>
+      <table style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background:#f0f0f0;">
+            <th style="padding:8px; border:1px solid #ddd;">#</th>
+            <th style="padding:8px; border:1px solid #ddd;">Name</th>
+            <th style="padding:8px; border:1px solid #ddd;">Email</th>
+            <th style="padding:8px; border:1px solid #ddd;">Phone</th>
+            <th style="padding:8px; border:1px solid #ddd;">Course</th>
+            <th style="padding:8px; border:1px solid #ddd;">Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% registrations.forEach((r, i) => { %>
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><%= i + 1 %></td>
+              <td style="padding:8px; border:1px solid #ddd;"><%= r.name %></td>
+              <td style="padding:8px; border:1px solid #ddd;"><%= r.email %></td>
+              <td style="padding:8px; border:1px solid #ddd;"><%= r.phone %></td>
+              <td style="padding:8px; border:1px solid #ddd;"><%= r.course %></td>
+              <td style="padding:8px; border:1px solid #ddd;"><%= r.submittedAt %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <a href="/" style="display:inline-block; margin-top:16px;">← Back to Form</a>
+  </div>
+
+</body>
+</html>
