@@ -682,3 +682,206 @@ input::placeholder {
   }
 
 }
+.card {
+  width: 100%;
+  max-width: 720px;
+
+  background: #ffffff;
+
+  padding: 45px 50px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 25px 70px rgba(16, 24, 40, 0.10),
+    0 4px 12px rgba(16, 24, 40, 0.05);
+}
+
+.card h2 {
+  margin-top: 12px;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.6px;
+
+  color: #172033;
+}
+
+.card .subtitle {
+  margin-top: 8px;
+
+  font-size: 13px;
+
+  color: #667085;
+}
+
+.success-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ecfdf3;
+
+  color: #12b76a;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+/* Divider */
+
+.divider {
+  width: 45px;
+  height: 4px;
+
+  margin: 24px 0;
+
+  border-radius: 10px;
+
+  background: #3157d5;
+}
+
+
+/* Result details */
+
+.result-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 10px;
+}
+
+.result-table tr {
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.result-table tr:last-child {
+  border-bottom: none;
+}
+
+.result-table td {
+  padding: 15px 8px;
+
+  font-size: 13px;
+
+  color: #475467;
+
+  vertical-align: top;
+}
+
+.result-table td:first-child {
+  width: 35%;
+
+  font-weight: 600;
+
+  color: #344054;
+}
+
+.result-table td:last-child {
+  font-weight: 500;
+
+  color: #172033;
+}
+
+
+/* Registration count */
+
+.badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-top: 25px;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  background: #eef4ff;
+
+  color: #3157d5;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+/* Bottom links */
+
+.link-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 30px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid #eaecf0;
+}
+
+.link-row a {
+  color: #3157d5;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.link-row a:hover {
+  color: #2444b3;
+
+  text-decoration: none;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .card {
+    padding: 30px 22px;
+
+    border-radius: 16px;
+  }
+
+  .card h2 {
+    font-size: 23px;
+  }
+
+  .result-table td {
+    padding: 12px 5px;
+
+    font-size: 12px;
+  }
+
+  .result-table td:first-child {
+    width: 38%;
+  }
+
+  .link-row {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    text-align: center;
+  }
+
+}
