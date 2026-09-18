@@ -1,47 +1,55 @@
-const express = require("express");
-const path = require("path");
-
+const express = require('express');
+const path = require('path');
 const app = express();
 
-// Configure View Engine (EJS)
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+// Temporary in-memory storage
+const registrations = [];
 
-// Middleware for parsing URL-encoded body data from form submission
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve static assets from public folder (CSS, images, etc.)
-app.use(express.static(path.join(__dirname, "public")));
-
-// GET / - Display the registration form
-app.get("/", (req, res) => {
-  res.render("index", { error: null, formData: {} });
+// GET - render form
+app.get('/', (req, res) => {
+  res.render('index', { errors: [] });
 });
 
-// POST /submit - Process submitted form data
-app.post("/submit", (req, res) => {
-  const { name, email, age, course } = req.body;
+// POST - validate and store
+app.post('/submit', (req, res) => {
+  const { name, email, phone, course, password, confirmPassword, gender } = req.body;
+  const errors = [];
 
-  // Server-side validation: Check that all required fields exist and are not empty
-  if (!name || !email || !age || !course || String(name).trim() === "" || String(email).trim() === "") {
-    return res.status(400).render("index", {
-      error: "All fields are required. Please provide valid input for all fields.",
-      formData: { name, email, age, course }
-    });
+  if (!name || name.trim() === '') errors.push('Name is required.');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Valid email is required.');
+  if (!phone || !/^\d{10}$/.test(phone)) errors.push('Phone must be 10 digits.');
+  if (!course) errors.push('Please select a course.');
+  if (!gender) errors.push('Please select a gender.');
+  if (!password || password.length < 6) errors.push('Password must be at least 6 characters.');
+  if (password !== confirmPassword) errors.push('Passwords do not match.');
+
+  if (errors.length > 0) {
+    return res.render('index', { errors });
   }
 
-  // Render the result view with dynamically injected variables
-  res.render("result", {
-    name: String(name).trim(),
-    email: String(email).trim(),
-    age: String(age).trim(),
-    course: String(course).trim()
-  });
+  const entry = {
+    name: name.trim(),
+    email: email.trim(),
+    phone: phone.trim(),
+    course,
+    gender,
+    submittedAt: new Date().toLocaleString()
+  };
+
+  registrations.push(entry);
+
+  res.render('result', { ...entry, total: registrations.length });
 });
 
-// Port configuration for local development and Render deployment
+// Optional - view all stored registrations
+app.get('/registrations', (req, res) => {
+  res.render('registrations', { registrations });
+});
+
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
