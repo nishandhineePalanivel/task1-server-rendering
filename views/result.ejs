@@ -1,22 +1,72 @@
-<div class="card">
-  <span class="success-icon">🎉</span>
-  <h2>Registration Successful</h2>
-  <p class="subtitle">Your details have been recorded</p>
-  <div class="divider"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful | StudentPortal</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
 
-  <table class="result-table">
-    <tr><td>Name</td><td><%= name %></td></tr>
-    <tr><td>Email</td><td><%= email %></td></tr>
-    <tr><td>Phone</td><td><%= phone %></td></tr>
-    <tr><td>Gender</td><td><%= gender %></td></tr>
-    <tr><td>Course</td><td><%= course %></td></tr>
-    <tr><td>Submitted At</td><td><%= submittedAt %></td></tr>
-  </table>
+<body>
 
-  <span class="badge">Total Registrations: <%= total %></span>
+  <main class="page-container">
 
-  <div class="link-row">
-    <a href="/">← Register Another</a>
-    <a href="/registrations">View All Registrations →</a>
-  </div>
-</div>
+    <div class="card">
+
+      <div class="success-icon">✓</div>
+
+      <h2>Registration Successful</h2>
+
+      <p class="subtitle">
+        Your registration has been completed successfully.
+      </p>
+
+      <div class="divider"></div>
+
+      <table class="result-table">
+        <tr>
+          <td>Name</td>
+          <td><%= name %></td>
+        </tr>
+
+        <tr>
+          <td>Email</td>
+          <td><%= email %></td>
+        </tr>
+
+        <tr>
+          <td>Phone</td>
+          <td><%= phone %></td>
+        </tr>
+
+        <tr>
+          <td>Gender</td>
+          <td><%= gender %></td>
+        </tr>
+
+        <tr>
+          <td>Course</td>
+          <td><%= course %></td>
+        </tr>
+
+        <tr>
+          <td>Submitted At</td>
+          <td><%= submittedAt %></td>
+        </tr>
+      </table>
+
+      <span class="badge">
+        Total Registrations: <%= total %>
+      </span>
+
+      <div class="link-row">
+        <a href="/">← Register Another</a>
+        <a href="/registrations">View All Registrations →</a>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
