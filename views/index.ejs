@@ -2,78 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration - Server Rendering</title>
+  <title>Registration Form</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h2>Student Registration Form</h2>
-        <p>Task 1: HTML Structure and Basic Server Interaction</p>
+
+  <div class="card">
+    <h2>Registration Form</h2>
+
+    <!-- Server-side error display -->
+    <% if (errors && errors.length > 0) { %>
+      <ul style="color: red; background: #ffe0e0; padding: 10px; border-radius: 6px; list-style: none;">
+        <% errors.forEach(e => { %>
+          <li>⚠️ <%= e %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <form onsubmit="return validateForm()" method="POST" action="/submit">
+
+      <label>Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
+
+      <label>Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email">
+
+      <label>Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="10-digit phone number">
+
+      <label>Password</label>
+      <input type="password" id="password" name="password" placeholder="Min 6 characters">
+
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password">
+
+      <label>Gender</label>
+      <div style="display: flex; gap: 20px; margin: 8px 0;">
+        <label><input type="radio" name="gender" value="Male"> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
       </div>
 
-      <% if (error) { %>
-        <div class="alert alert-error">
-          <p><%= error %></p>
-        </div>
-      <% } %>
+      <label>Course</label>
+      <select id="course" name="course">
+        <option value="">-- Select Course --</option>
+        <option value="Web Development">Web Development</option>
+        <option value="Data Science">Data Science</option>
+        <option value="AI/ML">AI/ML</option>
+        <option value="Cybersecurity">Cybersecurity</option>
+      </select>
 
-      <form action="/submit" method="POST" class="registration-form">
-        <div class="form-group">
-          <label for="name">Full Name:</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            value="<%= formData && formData.name ? formData.name : '' %>"
-            placeholder="Enter your name" 
-            required
-          >
-        </div>
+      <label>
+        <input type="checkbox" id="terms" name="terms">
+        I agree to the Terms and Conditions
+      </label>
 
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            value="<%= formData && formData.email ? formData.email : '' %>"
-            placeholder="Enter your email" 
-            required
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input 
-            type="number" 
-            id="age" 
-            name="age" 
-            value="<%= formData && formData.age ? formData.age : '' %>"
-            placeholder="Enter your age" 
-            min="1" 
-            max="120"
-            required
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="course">Course:</label>
-          <select id="course" name="course" required>
-            <option value="" disabled <%= !formData || !formData.course ? 'selected' : '' %>>Select Course</option>
-            <option value="B.E. Electronics and Communication Engineering" <%= formData && formData.course === 'B.E. Electronics and Communication Engineering' ? 'selected' : '' %>>B.E. Electronics and Communication Engineering</option>
-            <option value="B.E. Computer Science and Engineering" <%= formData && formData.course === 'B.E. Computer Science and Engineering' ? 'selected' : '' %>>B.E. Computer Science and Engineering</option>
-            <option value="B.Tech Information Technology" <%= formData && formData.course === 'B.Tech Information Technology' ? 'selected' : '' %>>B.Tech Information Technology</option>
-            <option value="B.E. Mechanical Engineering" <%= formData && formData.course === 'B.E. Mechanical Engineering' ? 'selected' : '' %>>B.E. Mechanical Engineering</option>
-            <option value="B.E. Electrical and Electronics Engineering" <%= formData && formData.course === 'B.E. Electrical and Electronics Engineering' ? 'selected' : '' %>>B.E. Electrical and Electronics Engineering</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit Registration</button>
-      </form>
-    </div>
+      <button type="submit">Register</button>
+    </form>
   </div>
+
+  <!-- Inline JavaScript - client-side validation -->
+  <script>
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const course = document.getElementById('course').value;
+      const terms = document.getElementById('terms').checked;
+
+      if (!name) {
+        alert('Name is required.');
+        return false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Enter a valid email.');
+        return false;
+      }
+      if (!/^\d{10}$/.test(phone)) {
+        alert('Phone must be exactly 10 digits.');
+        return false;
+      }
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters.');
+        return false;
+      }
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return false;
+      }
+      if (!course) {
+        alert('Please select a course.');
+        return false;
+      }
+      if (!terms) {
+        alert('You must agree to the Terms and Conditions.');
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
 </body>
 </html>
