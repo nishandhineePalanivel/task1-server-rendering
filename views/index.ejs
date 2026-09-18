@@ -1,71 +1,383 @@
-<div class="card">
-  <h2>Create Account</h2>
-  <p class="subtitle">Fill in the details below to register</p>
-  <div class="divider"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Student Portal</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
 
-  <% if (errors && errors.length > 0) { %>
-    <ul class="error-box">
-      <% errors.forEach(e => { %>
-        <li>⚠️ <%= e %></li>
-      <% }); %>
-    </ul>
-  <% } %>
+<body>
 
-  <form onsubmit="return validateForm()" method="POST" action="/submit">
+  <main class="page-container">
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="name" name="name" placeholder="John Doe">
+    <section class="auth-card">
+
+      <!-- Left Branding Section -->
+      <div class="brand-panel">
+
+        <div class="brand-logo">
+          <div class="logo-icon">S</div>
+          <span>StudentPortal</span>
+        </div>
+
+        <div class="brand-content">
+          <span class="eyebrow">WELCOME</span>
+
+          <h1>
+            Start your
+            <span>learning journey.</span>
+          </h1>
+
+          <p>
+            Create your account and get access to our
+            learning programs, resources and opportunities.
+          </p>
+
+          <div class="feature-list">
+
+            <div class="feature">
+              <div class="feature-icon">✓</div>
+              <div>
+                <strong>Easy Registration</strong>
+                <small>Complete your profile in minutes</small>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">✓</div>
+              <div>
+                <strong>Learn & Grow</strong>
+                <small>Choose from multiple courses</small>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">✓</div>
+              <div>
+                <strong>Secure Platform</strong>
+                <small>Your information stays protected</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="brand-footer">
+          <span>© 2026 StudentPortal</span>
+          <span>Registration System</span>
+        </div>
+
       </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="text" id="phone" name="phone" placeholder="10 digits">
+
+
+      <!-- Form Section -->
+      <div class="form-panel">
+
+        <div class="form-header">
+          <span class="mobile-logo">STUDENTPORTAL</span>
+
+          <h2>Create your account</h2>
+
+          <p>
+            Please enter your details to register.
+          </p>
+        </div>
+
+
+        <% if (errors && errors.length > 0) { %>
+
+          <div class="error-box">
+
+            <div class="error-title">
+              Please correct the following:
+            </div>
+
+            <ul>
+              <% errors.forEach(e => { %>
+                <li><%= e %></li>
+              <% }); %>
+            </ul>
+
+          </div>
+
+        <% } %>
+
+
+        <form method="POST" action="/submit">
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="name">
+                Full Name
+              </label>
+
+              <div class="input-wrapper">
+                <span class="input-icon">👤</span>
+
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your full name"
+                  required
+                >
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="phone">
+                Phone Number
+              </label>
+
+              <div class="input-wrapper">
+                <span class="input-icon">☎</span>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="10 digit number"
+                  maxlength="10"
+                  required
+                >
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="email">
+              Email Address
+            </label>
+
+            <div class="input-wrapper">
+              <span class="input-icon">✉</span>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              >
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="password">
+                Password
+              </label>
+
+              <div class="input-wrapper">
+
+                <span class="input-icon">🔒</span>
+
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Minimum 6 characters"
+                  minlength="6"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  onclick="togglePassword('password', this)"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="confirmPassword">
+                Confirm Password
+              </label>
+
+              <div class="input-wrapper">
+
+                <span class="input-icon">🔒</span>
+
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Re-enter password"
+                  minlength="6"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Gender
+            </label>
+
+            <div class="radio-options">
+
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  required
+                >
+                <span>Male</span>
+              </label>
+
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                >
+                <span>Female</span>
+              </label>
+
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Other"
+                >
+                <span>Other</span>
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="course">
+              Select Course
+            </label>
+
+            <div class="input-wrapper">
+
+              <span class="input-icon">▣</span>
+
+              <select id="course" name="course" required>
+
+                <option value="">
+                  Choose your course
+                </option>
+
+                <option value="Web Development">
+                  Web Development
+                </option>
+
+                <option value="Data Science">
+                  Data Science
+                </option>
+
+                <option value="AI/ML">
+                  Artificial Intelligence & Machine Learning
+                </option>
+
+                <option value="Cybersecurity">
+                  Cybersecurity
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <label class="terms">
+
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              required
+            >
+
+            <span>
+              I agree to the
+              <a href="#">Terms and Conditions</a>
+            </span>
+
+          </label>
+
+
+          <button
+            type="submit"
+            class="submit-button"
+          >
+            Create Account
+            <span>→</span>
+          </button>
+
+        </form>
+
+
+        <div class="form-footer">
+          Already registered?
+          <a href="/registrations">
+            View registrations
+          </a>
+        </div>
+
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com">
-    </div>
+    </section>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="password" name="password" placeholder="Min 6 chars">
-      </div>
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter">
-      </div>
-    </div>
+  </main>
 
-    <div class="form-group">
-      <label>Gender</label>
-      <div class="radio-group">
-        <label><input type="radio" name="gender" value="Male"> Male</label>
-        <label><input type="radio" name="gender" value="Female"> Female</label>
-        <label><input type="radio" name="gender" value="Other"> Other</label>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label>Course</label>
-      <select id="course" name="course">
-        <option value="">-- Select Course --</option>
-        <option value="Web Development">Web Development</option>
-        <option value="Data Science">Data Science</option>
-        <option value="AI/ML">AI/ML</option>
-        <option value="Cybersecurity">Cybersecurity</option>
-      </select>
-    </div>
+  <script>
 
-    <div class="checkbox-group">
-      <input type="checkbox" id="terms" name="terms">
-      <label for="terms">I agree to the Terms and Conditions</label>
-    </div>
+    function togglePassword(id, button) {
 
-    <button type="submit" class="btn-submit">Create Account →</button>
+      const input = document.getElementById(id);
 
-  </form>
-</div>
+      if (input.type === "password") {
+
+        input.type = "text";
+        button.textContent = "Hide";
+
+      } else {
+
+        input.type = "password";
+        button.textContent = "Show";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+</html>
