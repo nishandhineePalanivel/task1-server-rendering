@@ -1,38 +1,187 @@
-<div class="card">
-  <h2>All Registrations</h2>
-  <p class="subtitle">Temporarily stored in server memory</p>
-  <div class="divider"></div>
+<!DOCTYPE html>
+<html lang="en">
 
-  <% if (registrations.length === 0) { %>
-    <div class="empty-state">No registrations yet.</div>
-  <% } else { %>
-    <table class="reg-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Course</th>
-          <th>Submitted At</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% registrations.forEach((r, i) => { %>
-          <tr>
-            <td><%= i + 1 %></td>
-            <td><%= r.name %></td>
-            <td><%= r.email %></td>
-            <td><%= r.phone %></td>
-            <td><%= r.course %></td>
-            <td><%= r.submittedAt %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  <% } %>
+<head>
+  <meta charset="UTF-8">
 
-  <div class="link-row">
-    <a href="/">← Back to Form</a>
-  </div>
-</div>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Registrations | StudentPortal</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <main class="page-container">
+
+    <div class="card registrations-card">
+
+      <!-- Header -->
+
+      <div class="page-heading">
+
+        <div class="page-icon">
+          ☷
+        </div>
+
+        <div>
+          <h2>All Registrations</h2>
+
+          <p class="subtitle">
+            View all users registered through the portal
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="divider"></div>
+
+
+      <% if (registrations.length === 0) { %>
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            ○
+          </div>
+
+          <h3>No registrations yet</h3>
+
+          <p>
+            Registered users will appear here.
+          </p>
+
+          <a
+            href="/"
+            class="empty-button"
+          >
+            Create First Registration
+          </a>
+
+        </div>
+
+      <% } else { %>
+
+        <!-- Registration count -->
+
+        <div class="table-header">
+
+          <div>
+            <strong>Registered Users</strong>
+
+            <span class="count-badge">
+              <%= registrations.length %>
+            </span>
+          </div>
+
+          <a href="/">
+            + New Registration
+          </a>
+
+        </div>
+
+
+        <!-- Table -->
+
+        <div class="table-container">
+
+          <table class="reg-table">
+
+            <thead>
+
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Course</th>
+                <th>Submitted At</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <% registrations.forEach((r, i) => { %>
+
+                <tr>
+
+                  <td>
+                    <span class="row-number">
+                      <%= i + 1 %>
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="user-cell">
+                      <div class="avatar">
+                        <%= r.name.charAt(0).toUpperCase() %>
+                      </div>
+
+                      <strong>
+                        <%= r.name %>
+                      </strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="email-cell">
+                      <%= r.email %>
+                    </span>
+                  </td>
+
+                  <td>
+                    <%= r.phone %>
+                  </td>
+
+                  <td>
+                    <span class="course-badge">
+                      <%= r.course %>
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="date-cell">
+                      <%= r.submittedAt %>
+                    </span>
+                  </td>
+
+                </tr>
+
+              <% }); %>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      <% } %>
+
+
+      <!-- Footer -->
+
+      <div class="registrations-footer">
+
+        <a href="/">
+          ← Back to Registration Form
+        </a>
+
+        <span>
+          StudentPortal • Registration System
+        </span>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+
+</html>
