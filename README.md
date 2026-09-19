@@ -1,5 +1,6 @@
  Basic Server Interaction
 
+
 ## Objective
 The objective of this project is to introduce fundamental web application concepts including HTML structure, basic server-side rendering (SSR), HTTP POST form processing, and hosting deployment. It demonstrates how a client-side HTML form submits user input to a Node.js and Express backend server, which then processes the input and dynamically renders an HTML page using the EJS templating engine.
 
